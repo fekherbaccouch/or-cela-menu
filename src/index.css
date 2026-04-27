@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────── */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #FAF9F6;
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Root reset (override Vite template) ──────── */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100svh;
+  text-align: left;
+  border: none;
+  display: block;
+}
+
+/* ── Tile border strip pattern ────────────────── */
+.tile-strip {
+  background-color: #003399;
+  background-image:
+    linear-gradient(45deg,  #D49D35 25%, transparent 25%),
+    linear-gradient(-45deg, #D49D35 25%, transparent 25%),
+    linear-gradient(45deg,  transparent 75%, #E07825 75%),
+    linear-gradient(-45deg, transparent 75%, #E07825 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+}
+
+/* Scroll-smooth */
+html { scroll-behavior: smooth; }
