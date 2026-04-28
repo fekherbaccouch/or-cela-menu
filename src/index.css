@@ -40,14 +40,9 @@ body::after {
 
 /* ── Tile border strip pattern ────────────────── */
 .tile-strip {
-  background-color: #003399;
-  background-image:
-    linear-gradient(45deg,  #D49D35 25%, transparent 25%),
-    linear-gradient(-45deg, #D49D35 25%, transparent 25%),
-    linear-gradient(45deg,  transparent 75%, #E07825 75%),
-    linear-gradient(-45deg, transparent 75%, #E07825 75%);
-  background-size: 12px 12px;
-  background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+  background-image: url('/chart.png');
+  background-size: 20px 20px;
+  background-repeat: repeat;
 }
 
 /* Scroll-smooth */

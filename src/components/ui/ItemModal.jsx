@@ -130,14 +130,6 @@ export default function ItemModal({ item, onClose }) {
                   </h2>
                 </div>
 
-                {item.price && (
-                  <div className="flex items-baseline gap-1">
-                    <span className="font-serif text-3xl font-bold text-primary-blue">
-                      {item.price}
-                    </span>
-                    <span className="font-sans text-sm text-warm-gray font-semibold">DT</span>
-                  </div>
-                )}
 
                 <div className="w-10 border-t-2 border-gold-accent" />
 

@@ -19,7 +19,7 @@ export default function App() {
         <AboutSection      />
         <GallerySection    />
         <ExperienceSection id="events" />
-        <ContactSection    />
+        {/* <ContactSection    /> */}
       </main>
 
       <Footer />

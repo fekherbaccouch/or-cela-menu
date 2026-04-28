@@ -46,7 +46,7 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="lg:col-span-2 bg-deep-blue px-8 md:px-12 lg:px-14 py-20 md:py-28 flex flex-col gap-10"
+          className="lg:col-span-2 bg-deep-blue px-6 md:px-10 py-20 md:py-28 flex flex-col gap-10"
         >
           <div>
             <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-gold-accent mb-4">
@@ -97,7 +97,7 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="lg:col-span-3 bg-cream-paper px-8 md:px-12 lg:px-16 py-20 md:py-28 flex flex-col justify-center"
+          className="lg:col-span-3 bg-cream-paper px-6 md:px-10 py-20 md:py-28 flex flex-col justify-center"
         >
           <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-gold-accent mb-2">
             Formulaire

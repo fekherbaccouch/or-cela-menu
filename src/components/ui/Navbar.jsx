@@ -25,7 +25,7 @@ export default function Navbar({ searchQuery, onSearch }) {
         ? 'bg-cream-paper/95 backdrop-blur-xl shadow-md'
         : 'bg-transparent backdrop-blur-sm'}`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-5 md:px-10">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6 md:px-10">
 
         {/* Brand */}
         <a href="#menu" className="flex items-center gap-3 shrink-0" aria-label="Or Cela">

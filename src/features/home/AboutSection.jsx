@@ -10,16 +10,31 @@ const TAGS = ['Restaurant', 'Bar', 'Music Live', 'Événements Privés']
 
 export default function AboutSection() {
   return (
-    <section id="univers" className="overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+    <section id="univers" className="overflow-hidden relative">
 
-        {/* Left: Text panel */}
+      {/* Full-bleed bg panels — deep-blue left half, photo right half */}
+      <div className="absolute inset-y-0 left-0 right-1/2 bg-deep-blue hidden lg:block" />
+      <div className="absolute inset-y-0 left-1/2 right-0 hidden lg:block overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=1200&fit=crop&auto=format&q=85"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/30 to-transparent" />
+      </div>
+
+      {/* Content — max-w-7xl aligns with all other sections */}
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+
+        {/* Left text panel */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="bg-deep-blue flex flex-col justify-center px-8 md:px-14 lg:px-20 py-20 md:py-28"
+          className="bg-deep-blue lg:bg-transparent flex flex-col justify-center
+            px-6 md:px-10 py-20 md:py-28"
         >
           <p className="font-sans text-[10px] tracking-[0.45em] uppercase text-gold-accent mb-6">
             Notre Univers
@@ -47,14 +62,16 @@ export default function AboutSection() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 pt-8 mb-10">
-            <div className="h-px bg-gold-accent/20 col-span-3 -mb-6" />
-            {STATS.map(({ n, label }) => (
-              <div key={label}>
-                <p className="font-serif text-3xl font-bold text-gold-accent mb-1">{n}</p>
-                <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-cream-paper/40">{label}</p>
-              </div>
-            ))}
+          <div className="pt-8 mb-10">
+            <div className="h-px bg-gold-accent/20 mb-8" />
+            <div className="grid grid-cols-3 gap-6">
+              {STATS.map(({ n, label }) => (
+                <div key={label}>
+                  <p className="font-serif text-3xl font-bold text-gold-accent mb-1">{n}</p>
+                  <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-cream-paper/40">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Tags */}
@@ -69,13 +86,13 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        {/* Right: Photo panel */}
+        {/* Right photo panel — visible on mobile, hidden on lg (bg panel handles it) */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="relative min-h-[400px] lg:min-h-0 overflow-hidden"
+          className="lg:hidden relative min-h-[400px] overflow-hidden"
         >
           <img
             src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=1200&fit=crop&auto=format&q=85"
@@ -83,16 +100,23 @@ export default function AboutSection() {
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/30 to-transparent" />
-
-          <div className="absolute bottom-8 left-8 right-8">
-            <div className="bg-ink/70 backdrop-blur-sm p-6">
-              <p className="font-serif italic text-lg text-cream-paper/90 leading-snug mb-3">
-                "Une expérience sensorielle complète, entre art, gastronomie et musique."
-              </p>
-              <div className="w-8 h-px bg-gold-accent" />
-            </div>
-          </div>
         </motion.div>
+
+        {/* Quote overlay — right column on desktop */}
+        <div className="hidden lg:flex items-end px-6 md:px-10 pb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="bg-ink/70 backdrop-blur-sm p-6"
+          >
+            <p className="font-serif italic text-lg text-cream-paper/90 leading-snug mb-3">
+              "Une expérience sensorielle complète, entre art, gastronomie et musique."
+            </p>
+            <div className="w-8 h-px bg-gold-accent" />
+          </motion.div>
+        </div>
 
       </div>
     </section>

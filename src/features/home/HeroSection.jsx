@@ -1,38 +1,17 @@
 import { motion } from 'framer-motion'
 import { OrCelaLogoTile } from '../../components/ui/OrCelaLogo'
 
-function TilePlate({ size = 180, className = '' }) {
-  const dots = [0, 45, 90, 135, 180, 225, 270, 315].map(deg => ({
-    x: 100 + 93 * Math.cos((deg * Math.PI) / 180),
-    y: 100 + 93 * Math.sin((deg * Math.PI) / 180),
-  }))
 
+function TilePlate({ size = 180, className = '' }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true" className={className}>
-      <circle cx="100" cy="100" r="100" fill="#003399" />
-      <circle cx="100" cy="100" r="88" fill="#FAF9F6" />
-      <g fill="#003399">
-        <ellipse cx="100" cy="62"  rx="10" ry="23" />
-        <ellipse cx="100" cy="138" rx="10" ry="23" />
-        <ellipse cx="62"  cy="100" rx="23" ry="10" />
-        <ellipse cx="138" cy="100" rx="23" ry="10" />
-        <ellipse cx="74"  cy="74"  rx="10" ry="23" transform="rotate(-45 74 74)"   />
-        <ellipse cx="126" cy="74"  rx="10" ry="23" transform="rotate(45 126 74)"   />
-        <ellipse cx="74"  cy="126" rx="10" ry="23" transform="rotate(45 74 126)"   />
-        <ellipse cx="126" cy="126" rx="10" ry="23" transform="rotate(-45 126 126)" />
-      </g>
-      <circle cx="100" cy="100" r="42" fill="#D49D35" />
-      <polygon points="100,65 109,91 137,91 115,108 123,134 100,118 77,134 85,108 63,91 91,91" fill="#FAF9F6" />
-      <circle cx="100" cy="100" r="17" fill="#003399" />
-      <circle cx="100" cy="100" r="10" fill="#D49D35" />
-      <circle cx="100" cy="100" r="5"  fill="#FAF9F6" />
-      {dots.map(({ x, y }, i) => <circle key={i} cx={x} cy={y} r="4" fill="#D49D35" />)}
-      <circle cx="22"  cy="22"  r="11" fill="#E07825" opacity="0.7" />
-      <circle cx="178" cy="22"  r="11" fill="#E07825" opacity="0.7" />
-      <circle cx="22"  cy="178" r="11" fill="#E07825" opacity="0.7" />
-      <circle cx="178" cy="178" r="11" fill="#E07825" opacity="0.7" />
-    </svg>
+    <img
+      src="/chart.png"
+      width={size}
+      height={size}
+      aria-hidden="true"
+      className={className}
+      style={{ objectFit: 'cover', display: 'block' }}
+    />
   )
 }
 
