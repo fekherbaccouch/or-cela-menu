@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 const STATS = [
-  { n: '2024', label: 'Ouverture' },
+  { n: '2026', label: 'Ouverture' },
   { n: '44',   label: 'Plats signature' },
   { n: '100%', label: 'Produits frais' },
 ]
