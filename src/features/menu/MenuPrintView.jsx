@@ -119,21 +119,6 @@ export default function MenuPrintView({ onSelectItem }) {
           </div>
         </div>
 
-        {/* ── MENU title ── */}
-        <div className="flex items-center gap-4 mb-3">
-          <div className="flex-1 h-px bg-gold-accent/40" />
-          <div className="flex items-center gap-3 px-2">
-            <span className="text-gold-accent text-sm font-serif">—</span>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary-blue tracking-[0.12em] uppercase">
-              Menu
-            </h2>
-            <span className="text-gold-accent text-sm font-serif">—</span>
-          </div>
-          <div className="flex-1 h-px bg-gold-accent/40" />
-        </div>
-        <p className="text-center font-serif italic text-warm-gray text-sm mb-4">
-          Une expérience méditerranéenne élégante et authentique.
-        </p>
 
         {/* ── BOISSONS ── */}
         <OrnateDiv label="Boissons" />
