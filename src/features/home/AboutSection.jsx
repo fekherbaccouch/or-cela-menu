@@ -2,11 +2,11 @@ import { motion } from 'framer-motion'
 
 const STATS = [
   { n: '2026', label: 'Ouverture' },
-  { n: '44',   label: 'Plats signature' },
+  { n: '33',   label: 'Plats signature' },
   { n: '100%', label: 'Produits frais' },
 ]
 
-const TAGS = ['Restaurant', 'Bar', 'Music Live', 'Événements Privés']
+const TAGS = ['Restaurant', 'Bar', 'Music Live']
 
 export default function AboutSection() {
   return (

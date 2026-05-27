@@ -1,4 +1,4 @@
-import { Beer, GlassWater, Wine, UtensilsCrossed, Leaf } from 'lucide-react'
+import { Beer, GlassWater, Wine, UtensilsCrossed, Leaf, Martini } from 'lucide-react'
 import { OrCelaLogoTile } from '../../components/ui/OrCelaLogo'
 import { menuItems, SUBCATS } from '../../data/menuData'
 
@@ -24,16 +24,31 @@ function Item({ item, prefix, onSelect }) {
   return (
     <button
       onClick={() => onSelect(item)}
-      className="group flex items-start gap-2 text-left w-full py-[3px] hover:text-primary-blue transition-colors"
+      className="group flex items-center gap-2 text-left w-full
+        px-2 py-[6px] my-[2px] rounded-sm border border-transparent
+        hover:border-primary-blue/15 hover:bg-primary-blue/5
+        active:bg-primary-blue/10 transition-all duration-150"
     >
-      <span className="font-sans text-[10px] text-gold-accent/60 shrink-0 mt-[2px] w-4 text-right">
+      <span className="font-sans text-[10px] text-gold-accent/50 shrink-0 w-4 text-right">
         {prefix}
       </span>
-      <span className="flex-1 font-sans text-[12px] md:text-[13px] text-ink leading-snug group-hover:text-primary-blue">
+      <span className="flex-1 font-sans text-[12px] md:text-[13px] font-semibold text-ink leading-snug
+        group-hover:text-primary-blue transition-colors duration-150 underline decoration-dotted
+        decoration-primary-blue/25 underline-offset-2">
         {item.name}
         {item.isFeatured && (
           <span className="ml-1.5 font-sans text-[8px] tracking-[0.12em] uppercase text-gold-accent font-bold">⭑</span>
         )}
+      </span>
+      {item.price && (
+        <span className="font-sans text-[11px] text-primary-blue/60 font-semibold shrink-0 ml-1
+          group-hover:text-primary-blue transition-colors duration-150">
+          {item.price} DT
+        </span>
+      )}
+      <span className="text-primary-blue/30 group-hover:text-primary-blue/70
+        transition-colors duration-150 text-[12px] shrink-0">
+        ›
       </span>
     </button>
   )
@@ -53,7 +68,14 @@ function SubHead({ icon: Icon, title }) {
 /* Main View                                               */
 /* ─────────────────────────────────────────────────────── */
 const BOISSON_ICONS = {
-  'Bières': Beer, 'Soft Drinks': GlassWater, 'Vins Rouges': Wine, 'Vins Rosés': Wine, 'Vins Blancs': Wine,
+  'Bières':      Beer,
+  'Soft Drinks': GlassWater,
+  'Vins Rouges': Wine,
+  'Vins Rosés':  Wine,
+  'Vins Blancs': Wine,
+  'Vodka':       GlassWater,
+  'Whisky':      Wine,
+  'Gin':         Wine,
 }
 
 export default function MenuPrintView({ onSelectItem }) {
@@ -69,6 +91,10 @@ export default function MenuPrintView({ onSelectItem }) {
 
   const tapas = menuItems.filter(i => i.category === 'Tapas')
   const tapasChunk = [tapas.slice(0, 4), tapas.slice(4, 8), tapas.slice(8)]
+
+  const cocktailsSubs = SUBCATS.Cocktails.map(sub => ({
+    sub, items: menuItems.filter(i => i.category === 'Cocktails' && i.subcategory === sub),
+  }))
 
   const checkerboardStyle = {
     backgroundColor: '#fff',
@@ -100,17 +126,6 @@ export default function MenuPrintView({ onSelectItem }) {
             </div>
           </div>
 
-          {/* ── BOISSONS ── */}
-          <OrnateDiv label="Boissons" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-            {boissonsSubs.map(({ sub, items }) => (
-              <div key={sub}>
-                <SubHead icon={BOISSON_ICONS[sub] ?? Wine} title={sub} />
-                <ul>{items.map(item => <Item key={item.id} item={item} prefix="•" onSelect={onSelectItem} />)}</ul>
-              </div>
-            ))}
-          </div>
-
           {/* ── CUISINE ── */}
           <OrnateDiv label="Cuisine" icon={UtensilsCrossed} />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -132,6 +147,29 @@ export default function MenuPrintView({ onSelectItem }) {
                   <Item key={item.id} item={item} prefix={`${ci * 4 + li + 1}.`} onSelect={onSelectItem} />
                 ))}
               </ul>
+            ))}
+          </div>
+
+          {/* ── COCKTAILS ── */}
+          <OrnateDiv label="Cocktails" icon={Martini} />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+            {cocktailsSubs.map(({ sub, items }) => (
+              <div key={sub}>
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase font-bold text-primary-blue mb-3 text-center">{sub}</p>
+                <div className="h-px bg-gold-accent/20 mb-4" />
+                <ul>{items.map(item => <Item key={item.id} item={item} prefix="•" onSelect={onSelectItem} />)}</ul>
+              </div>
+            ))}
+          </div>
+
+          {/* ── BOISSONS ── */}
+          <OrnateDiv label="Boissons" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+            {boissonsSubs.map(({ sub, items }) => (
+              <div key={sub}>
+                <SubHead icon={BOISSON_ICONS[sub] ?? Wine} title={sub} />
+                <ul>{items.map(item => <Item key={item.id} item={item} prefix="•" onSelect={onSelectItem} />)}</ul>
+              </div>
             ))}
           </div>
 

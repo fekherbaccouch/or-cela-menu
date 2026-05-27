@@ -30,6 +30,8 @@ function Tag({ label, variant }) {
 export default function ItemModal({ item, onClose }) {
   const [imgError, setImgError] = useState(false)
 
+  useEffect(() => { setImgError(false) }, [item?.id])
+
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', onKey)
@@ -92,29 +94,6 @@ export default function ItemModal({ item, onClose }) {
                     <FallbackBg item={item} />
                   )}
 
-                  {/* Gradient at bottom of image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-blue/60 via-transparent to-transparent" />
-
-                  {/* Badges on image */}
-                  <div className="absolute bottom-4 left-4 flex flex-col gap-2">
-                    {item.isFeatured && (
-                      <div className="inline-flex items-center gap-1.5 bg-gold-accent px-3 py-1.5 self-start">
-                        <span className="w-1.5 h-1.5 bg-primary-blue" />
-                        <span className="font-sans text-[9px] tracking-[0.15em] uppercase font-bold text-primary-blue">
-                          Chef's Pick
-                        </span>
-                      </div>
-                    )}
-                    {item.hasVideo && (
-                      <button className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm
-                        px-3 py-1.5 self-start hover:bg-white transition-colors shadow-sm">
-                        <Play size={11} className="text-primary-blue" fill="currentColor" />
-                        <span className="font-sans text-[9px] tracking-[0.12em] uppercase font-bold text-primary-blue">
-                          Voir vidéo
-                        </span>
-                      </button>
-                    )}
-                  </div>
                 </div>
               </div>
 
@@ -137,13 +116,11 @@ export default function ItemModal({ item, onClose }) {
                   {item.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 pt-2 border-t border-primary-blue/8 mt-auto">
-                  <Tag label={item.origin} variant="origin" />
-                  {item.type.map(t => <Tag key={t} label={t} variant="diet" />)}
-                  {item.subcategory !== item.category && (
-                    <Tag label={item.subcategory} variant="sub" />
-                  )}
-                </div>
+                {item.price && (
+                  <p className="mt-auto pt-4 border-t border-primary-blue/8 font-serif text-2xl font-bold text-primary-blue">
+                    {item.price} <span className="text-base font-sans font-normal text-warm-gray">DT</span>
+                  </p>
+                )}
 
               </div>
             </div>

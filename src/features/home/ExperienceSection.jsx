@@ -103,9 +103,9 @@ export default function ExperienceSection({ id }) {
               Hôtel Acquaviva · Gammarth
             </p>
           </div>
-          <a href="#contact"
+          <a href="https://wa.me/21655959777" target="_blank" rel="noopener noreferrer"
             className="px-8 py-3.5 bg-primary-blue font-sans text-[10px] font-bold
-              tracking-[0.22em] uppercase text-cream-paper
+              tracking-[0.22em] uppercase text-cream-paper rounded-md
               hover:bg-deep-blue transition-colors shadow-md">
             Réserver une table
           </a>

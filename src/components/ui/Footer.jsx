@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { MapPin, Phone } from 'lucide-react'
 import { OrCelaLogoTile } from './OrCelaLogo'
 
 function InstagramIcon({ size = 16 }) {
@@ -20,9 +20,7 @@ function FacebookIcon({ size = 16 }) {
 }
 
 const HOURS = [
-  { day: 'Lun – Ven', time: '12h – 15h  ·  19h – 00h' },
-  { day: 'Samedi',    time: '12h – 01h'                },
-  { day: 'Dimanche',  time: '12h – 23h'                },
+  { day: 'Tous les jours', time: '18h – 02h' },
 ]
 
 export default function Footer() {
@@ -47,17 +45,26 @@ export default function Footer() {
               Une expérience culinaire et sensorielle au cœur de Gammarth.
             </p>
             <div className="flex gap-3">
-              {[
-                { Icon: InstagramIcon, label: 'Instagram' },
-                { Icon: FacebookIcon,  label: 'Facebook'  },
-              ].map(({ Icon, label }) => (
-                <a key={label} href="#" aria-label={label}
-                  className="w-9 h-9 bg-gold-accent/10 flex items-center
-                    justify-center text-gold-accent/70 hover:bg-gold-accent hover:text-primary-blue
-                    transition-all">
-                  <Icon size={15} />
-                </a>
-              ))}
+              <a href="https://www.instagram.com/or.cela?igsh=anN6eWVrbDJwNXBq" target="_blank" rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 bg-gold-accent/10 flex items-center justify-center
+                  text-gold-accent/70 hover:bg-gold-accent hover:text-primary-blue transition-all">
+                <InstagramIcon size={15} />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61583724637130" target="_blank" rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-9 h-9 bg-gold-accent/10 flex items-center justify-center
+                  text-gold-accent/70 hover:bg-gold-accent hover:text-primary-blue transition-all">
+                <FacebookIcon size={15} />
+              </a>
+              <a href="https://wa.me/21655959777" target="_blank" rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-9 h-9 bg-gold-accent/10 flex items-center justify-center
+                  text-gold-accent/70 hover:bg-gold-accent hover:text-primary-blue transition-all">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -78,18 +85,19 @@ export default function Footer() {
           <div>
             <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-gold-accent mb-5">Contact</p>
             <ul className="space-y-4">
-              {[
-                { Icon: MapPin, text: 'Hôtel Acquaviva\nGammarth, Tunisie' },
-                { Icon: Phone,  text: '+216 XX XXX XXX'                     },
-                { Icon: Mail,   text: 'contact@orcela.tn'                   },
-              ].map(({ Icon, text }) => (
-                <li key={text} className="flex items-start gap-3">
-                  <Icon size={14} strokeWidth={1.5} className="text-gold-accent/60 mt-0.5 shrink-0" />
-                  <span className="font-sans text-[12px] text-cream-paper/60 whitespace-pre-line leading-relaxed">
-                    {text}
-                  </span>
-                </li>
-              ))}
+              <li className="flex items-start gap-3">
+                <MapPin size={14} strokeWidth={1.5} className="text-gold-accent/60 mt-0.5 shrink-0" />
+                <span className="font-sans text-[12px] text-cream-paper/60 whitespace-pre-line leading-relaxed">
+                  {'Hôtel Acquaviva\nGammarth, Tunisie'}
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone size={14} strokeWidth={1.5} className="text-gold-accent/60 mt-0.5 shrink-0" />
+                <a href="https://wa.me/21655959777" target="_blank" rel="noopener noreferrer"
+                  className="font-sans text-[12px] text-cream-paper/60 hover:text-gold-accent transition-colors">
+                  +216 55 959 777
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -97,15 +105,22 @@ export default function Footer() {
           <div>
             <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-gold-accent mb-5">Navigation</p>
             <ul className="space-y-3">
-              {['Menu', 'Notre Univers', 'Galerie', 'Événements', 'Réservation'].map(item => (
+              {['Menu', 'Notre Univers', 'Galerie'].map(item => (
                 <li key={item}>
-                  <a href={`#${item === 'Notre Univers' ? 'univers' : item === 'Réservation' ? 'contact' : item.toLowerCase()}`}
+                  <a href={`#${item === 'Notre Univers' ? 'univers' : item.toLowerCase()}`}
                     className="font-sans text-[12px] text-cream-paper/50 hover:text-gold-accent
                       transition-colors tracking-wide">
                     {item}
                   </a>
                 </li>
               ))}
+              <li>
+                <a href="https://wa.me/21655959777" target="_blank" rel="noopener noreferrer"
+                  className="font-sans text-[12px] text-cream-paper/50 hover:text-gold-accent
+                    transition-colors tracking-wide">
+                  Réserver une table
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -101,7 +101,7 @@ export default function HeroSection() {
               font-bold tracking-[0.2em] uppercase hover:bg-deep-blue transition-colors shadow-md">
             Notre Menu
           </a>
-          <a href="#contact"
+          <a href="https://wa.me/21655959777" target="_blank" rel="noopener noreferrer"
             className="px-8 py-3.5 bg-primary-blue/10 text-primary-blue font-sans text-[11px]
               font-bold tracking-[0.2em] uppercase hover:bg-primary-blue hover:text-cream-paper transition-colors">
             Réserver
