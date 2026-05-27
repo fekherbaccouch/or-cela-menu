@@ -1,4 +1,50 @@
 import { motion } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+
+function SeamlessVideo({ src, className }) {
+  const ref0 = useRef(null)
+  const ref1 = useRef(null)
+  const [active, setActive] = useState(0)
+  const switching = useRef(false)
+
+  useEffect(() => {
+    const vid = active === 0 ? ref0.current : ref1.current
+    if (!vid) return
+    switching.current = false
+
+    const onTimeUpdate = () => {
+      if (switching.current || !vid.duration) return
+      if (vid.currentTime >= vid.duration - 0.8) {
+        switching.current = true
+        const next = active === 0 ? ref1.current : ref0.current
+        if (next) { next.currentTime = 0; next.play().catch(() => {}) }
+        setActive(a => 1 - a)
+      }
+    }
+
+    vid.addEventListener('timeupdate', onTimeUpdate)
+    return () => vid.removeEventListener('timeupdate', onTimeUpdate)
+  }, [active])
+
+  return (
+    <div className={className}>
+      {[ref0, ref1].map((ref, i) => (
+        <motion.video
+          key={i}
+          ref={ref}
+          src={src}
+          autoPlay={i === 0}
+          muted
+          playsInline
+          aria-hidden="true"
+          animate={{ opacity: active === i ? 1 : 0 }}
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      ))}
+    </div>
+  )
+}
 
 const STATS = [
   { n: '2026', label: 'Ouverture' },
@@ -12,15 +58,10 @@ export default function AboutSection() {
   return (
     <section id="univers" className="overflow-hidden relative">
 
-      {/* Full-bleed bg panels — deep-blue left half, photo right half */}
+      {/* Full-bleed bg panels — deep-blue left half, video right half */}
       <div className="absolute inset-y-0 left-0 right-1/2 bg-deep-blue hidden lg:block" />
       <div className="absolute inset-y-0 left-1/2 right-0 hidden lg:block overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=1200&fit=crop&auto=format&q=85"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover"
-        />
+        <SeamlessVideo src="/wine.mp4" className="absolute inset-0 w-full h-full" />
         <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/30 to-transparent" />
       </div>
 
@@ -86,7 +127,7 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        {/* Right photo panel — visible on mobile, hidden on lg (bg panel handles it) */}
+        {/* Right video panel — visible on mobile, hidden on lg (bg panel handles it) */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -94,11 +135,7 @@ export default function AboutSection() {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="lg:hidden relative min-h-[400px] overflow-hidden"
         >
-          <img
-            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=1200&fit=crop&auto=format&q=85"
-            alt="Or Cela — ambiance"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <SeamlessVideo src="/wine.mp4" className="absolute inset-0 w-full h-full" />
           <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/30 to-transparent" />
         </motion.div>
 

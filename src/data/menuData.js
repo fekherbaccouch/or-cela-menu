@@ -176,27 +176,11 @@ export const menuItems = [
   /* ── CUISINE · Assortiment Tajine ───────────────────────────────────────── */
   {
     id: 'taj-001',
-    name: 'Tajin Sebnekh',
-    description: 'Épinard, fromage, ricotta, œufs. Assortiment 6 pièces.',
-    category: 'Cuisine', subcategory: 'Assortiment Tajine',
-    origin: 'Tunisia', type: ['Vegetarian'], price: 30,
-    isFeatured: false, imageUrl: '/taj-001.webp', hasVideo: false,
-  },
-  {
-    id: 'taj-002',
-    name: 'Tajin Malsouka',
-    description: 'Poulet, fromage, œufs. Assortiment 6 pièces.',
+    name: 'Assortiment Tajine',
+    description: 'Assortiment de 3 variétés : Tajin Sebnekh (épinard, fromage, ricotta), Tajin Malsouka (poulet, fromage), Tajin Salade Méchouia (thon, salade méchouia). 6 pièces.',
     category: 'Cuisine', subcategory: 'Assortiment Tajine',
     origin: 'Tunisia', type: [], price: 30,
-    isFeatured: false, imageUrl: '/taj-002.webp', hasVideo: false,
-  },
-  {
-    id: 'taj-003',
-    name: 'Tajin Salade Mechouia',
-    description: 'Thon, fromage, salade méchouia. Assortiment 6 pièces.',
-    category: 'Cuisine', subcategory: 'Assortiment Tajine',
-    origin: 'Tunisia', type: [], price: 30,
-    isFeatured: true,  imageUrl: '/taj-003.webp', hasVideo: false,
+    isFeatured: true, imageUrl: '/taj-001.webp', hasVideo: false,
   },
 
   /* ── CUISINE · Assortiment Brik ─────────────────────────────────────────── */

@@ -110,20 +110,12 @@ export default function MenuPrintView({ onSelectItem }) {
 
         {/* Inner Document */}
         <div
-          className="bg-[#FAF9F6] px-6 sm:px-10 md:px-16 py-12 md:py-16"
+          className="bg-[#FAF9F6] px-6 sm:px-10 md:px-16 py-0"
           style={{ border: '1px solid rgba(212,157,53,0.35)' }}
         >
           {/* Brand header */}
-          <div className="text-center mb-10">
-            <div className="flex flex-col items-center justify-center gap-2">
-              <OrCelaLogoTile size={72} />
-              <h1 className="font-serif text-5xl md:text-6xl font-bold text-primary-blue leading-none">
-                Or Cela
-              </h1>
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-warm-gray">
-                Restaurant · Bar · Music &amp; more
-              </p>
-            </div>
+          <div className="flex items-center justify-center">
+            <OrCelaLogoTile size={154} />
           </div>
 
           {/* ── CUISINE ── */}

@@ -29,17 +29,8 @@ export default function Navbar() {
 
         {/* Brand */}
         <a href="#menu" className="flex items-center gap-3 shrink-0" aria-label="Or Cela">
-          <OrCelaLogoTile size={38} />
-          <div className="leading-none">
-            <span className={`font-serif text-lg font-bold block transition-colors duration-300
-              ${scrolled ? 'text-primary-blue' : 'text-cream-paper'}`}>
-              Or Cela
-            </span>
-            <span className={`font-sans text-[8px] tracking-[0.22em] uppercase transition-colors duration-300
-              ${scrolled ? 'text-warm-gray' : 'text-cream-paper/60'}`}>
-              Restaurant · Bar · Music
-            </span>
-          </div>
+          <OrCelaLogoTile size={80} white={!scrolled} />
+        
         </a>
 
         {/* Desktop nav */}

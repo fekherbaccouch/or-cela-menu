@@ -1,15 +1,99 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
-const U = (id) => `https://images.unsplash.com/photo-${id}?auto=format&q=80`
-
-const PHOTOS = [
-  { id: '1414235077428-338989a2e8c0', label: 'Ambiance'       },
-  { id: '1559847844-5315695dadae',    label: 'Cuisine'         },
-  { id: '1567620905732-2d1ec7ab7445', label: 'Nos Plats'       },
-  { id: '1571877227200-a0d98ea607e9', label: 'Desserts'        },
-  { id: '1510626176961-4b57d4fbad03', label: 'Le Bar'          },
-  { id: '1585937421612-70a008356fbe', label: 'Tapas'           },
+const FOOD = [
+  { src: '/brk-001.webp',  label: 'Assortiment Brik'      },
+  { src: '/brk-002.webp',  label: 'Brik Danouni'          },
+  { src: '/brk-003.webp',  label: 'Assortiment Brik'      },
+  { src: '/ef-002.webp',   label: 'Salade Tunisienne'      },
+  { src: '/ef-003.webp',   label: 'Sardines Marinées'      },
+  { src: '/piz-001.webp',  label: 'Pizza Nokhet Lebled'    },
+  { src: '/piz-002.webp',  label: 'Pizza Halk Lwed'        },
+  { src: '/sui-001.webp',  label: 'Madfouna Boulettes'     },
+  { src: '/sui-002.webp',  label: 'Klaya Agneau'           },
+  { src: '/taj-001.webp',  label: 'Assortiment Tajine'     },
+  { src: '/taj-002.webp',  label: 'Assortiment Tajine'     },
+  { src: '/taj-003.webp',  label: 'Tajin Salade Méchouia'  },
 ]
+
+const COCKTAILS = [
+  { src: '/cnot-001.webp', label: 'Elmdina'        },
+  { src: '/cnot-002.webp', label: 'Sidi Bou'       },
+  { src: '/cnot-003.webp', label: 'Tunisiano'      },
+  { src: '/csig-004.webp', label: 'Ice Breath'     },
+]
+
+const WINES = [
+  { src: '/vin-r-001.webp',   label: 'Vin Rouge'   },
+  { src: '/vin-r-002.webp',   label: 'Vin Rouge'   },
+  { src: '/vin-r-003.webp',   label: 'Vin Rouge'   },
+  { src: '/vin-r-004.webp',   label: 'Vin Rouge'   },
+  { src: '/vin-r-005.webp',   label: 'Vin Rouge'   },
+  { src: '/vin-r-006.webp',   label: 'Vin Rouge'   },
+  { src: '/vin-ros-002.webp', label: 'Vin Rosé'    },
+  { src: '/vin-ros-003.webp', label: 'Vin Rosé'    },
+  { src: '/vin-ros-004.webp', label: 'Vin Rosé'    },
+  { src: '/vin-ros-005.webp', label: 'Vin Rosé'    },
+  { src: '/vin-ros-007.webp', label: 'Vin Rosé'    },
+  { src: '/vin-ros-008.webp', label: 'Vin Rosé'    },
+  { src: '/vin-b-001.webp',   label: 'Vin Blanc'   },
+  { src: '/vin-b-002.webp',   label: 'Vin Blanc'   },
+  { src: '/vin-b-003.webp',   label: 'Vin Blanc'   },
+  { src: '/vin-b-005.webp',   label: 'Vin Blanc'   },
+  { src: '/vin-b-006.webp',   label: 'Vin Blanc'   },
+  { src: '/vin-b-007.webp',   label: 'Vin Blanc'   },
+  { src: '/vin-b-008.webp',   label: 'Vin Blanc'   },
+]
+
+const ALL = [...FOOD, ...COCKTAILS, ...WINES]
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5)
+}
+
+function AnimatedTile({ images, interval = 4000, className }) {
+  const [pool] = useState(() => shuffle(images))
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => setIndex(i => (i + 1) % pool.length), interval)
+    return () => clearInterval(t)
+  }, [pool, interval])
+
+  const current = pool[index]
+
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={current.src}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          <motion.img
+            src={current.src}
+            alt={current.label}
+            initial={{ scale: 1.06 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 1 }}
+            transition={{ duration: 0.9, ease: 'easeInOut' }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/65 via-transparent to-transparent" />
+          <div className="absolute bottom-5 left-5">
+            <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold-accent mb-0.5">Or Cela</p>
+            <p className="font-serif text-lg md:text-xl font-bold text-cream-paper leading-tight">
+              {current.label}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export default function GallerySection() {
   return (
@@ -37,106 +121,24 @@ export default function GallerySection() {
           </p>
         </motion.div>
 
-        {/* Mobile: stacked rows. Desktop: editorial 4-col 2-row grid */}
+        {/* Desktop grid */}
         <div className="hidden md:grid md:grid-cols-4 md:grid-rows-2 gap-3" style={{ height: '520px' }}>
-
-          {/* Big feature tile */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="col-span-2 row-span-2 relative overflow-hidden group cursor-pointer"
-          >
-            <img
-              src={`${U(PHOTOS[0].id)}&w=800&h=900&fit=crop`}
-              alt={PHOTOS[0].label}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6">
-              <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold-accent mb-1">Or Cela</p>
-              <p className="font-serif text-2xl font-bold text-cream-paper">{PHOTOS[0].label}</p>
-            </div>
-          </motion.div>
-
-          {/* 4 smaller tiles */}
-          {PHOTOS.slice(1, 5).map((photo, i) => (
-            <motion.div
-              key={photo.id}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="relative overflow-hidden group cursor-pointer"
-            >
-              <img
-                src={`${U(photo.id)}&w=500&h=500&fit=crop`}
-                alt={photo.label}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-ink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="font-sans text-[9px] tracking-[0.2em] uppercase font-semibold text-cream-paper">
-                  {photo.label}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+          <AnimatedTile images={ALL}       interval={3800} className="col-span-2 row-span-2" />
+          <AnimatedTile images={FOOD}      interval={4200} className="col-span-1 row-span-1" />
+          <AnimatedTile images={COCKTAILS} interval={3200} className="col-span-1 row-span-1" />
+          <AnimatedTile images={WINES}     interval={4800} className="col-span-1 row-span-1" />
+          <AnimatedTile images={ALL}       interval={3500} className="col-span-1 row-span-1" />
         </div>
 
-        {/* Mobile layout: 1 big + 2x2 grid */}
+        {/* Mobile layout */}
         <div className="md:hidden flex flex-col gap-2">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative overflow-hidden group cursor-pointer"
-            style={{ height: '260px' }}
-          >
-            <img
-              src={`${U(PHOTOS[0].id)}&w=800&h=500&fit=crop`}
-              alt={PHOTOS[0].label}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4">
-              <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold-accent mb-0.5">Or Cela</p>
-              <p className="font-serif text-xl font-bold text-cream-paper">{PHOTOS[0].label}</p>
-            </div>
-          </motion.div>
-
+          <AnimatedTile images={ALL} interval={3800} className="relative h-[260px]" />
           <div className="grid grid-cols-2 gap-2">
-            {PHOTOS.slice(1, 5).map((photo, i) => (
-              <motion.div
-                key={photo.id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-                className="relative overflow-hidden group cursor-pointer aspect-square"
-              >
-                <img
-                  src={`${U(photo.id)}&w=400&h=400&fit=crop`}
-                  alt={photo.label}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-ink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-                  <p className="font-sans text-[9px] tracking-[0.2em] uppercase font-semibold text-cream-paper">
-                    {photo.label}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+            <AnimatedTile images={FOOD}      interval={4000} className="relative aspect-square" />
+            <AnimatedTile images={COCKTAILS} interval={3200} className="relative aspect-square" />
+            <AnimatedTile images={WINES}     interval={4500} className="relative aspect-square" />
+            <AnimatedTile images={ALL}       interval={3600} className="relative aspect-square" />
           </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-10">
-          <span className="inline-block bg-gold-accent/10 px-8 py-3
-            font-sans text-[10px] tracking-[0.25em] uppercase text-gold-accent/70">
-            Photos à venir — Ouverture très prochaine
-          </span>
         </div>
 
       </div>

@@ -32,14 +32,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <OrCelaLogoTile size={42} />
-              <div>
-                <p className="font-serif text-xl font-bold text-cream-paper">Or Cela</p>
-                <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-gold-accent/70">
-                  Restaurant · Bar · Music
-                </p>
-              </div>
+            <div className="mb-6">
+              <OrCelaLogoTile size={80} white={true} />
             </div>
             <p className="font-serif italic text-cream-paper/40 text-sm leading-relaxed mb-8">
               Une expérience culinaire et sensorielle au cœur de Gammarth.
